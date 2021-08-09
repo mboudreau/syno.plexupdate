@@ -136,7 +136,9 @@ printf "\n"
 # SCRAPE SYNOLOGY HARDWARE MODEL
 SynoHModel=$(cat /proc/sys/kernel/syno_hw_version)
 # SCRAPE SYNOLOGY CPU ARCHITECTURE FAMILY
-ArchFamily=$(uname -m)
+if [ -z "$ArchFamily" ]; then
+  ArchFamily=$(uname -m)     
+fi
 # SCRAPE DSM VERSION AND CHECK COMPATIBILITY
 DSMVersion=$(                   cat /etc.defaults/VERSION | grep -i 'productversion=' | cut -d"\"" -f 2)
 # CHECK IF X86 MODEL
